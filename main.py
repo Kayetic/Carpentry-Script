@@ -1,8 +1,11 @@
+import externalModules
+
 # Main menu
 while True:
     choice = input("""
-Enter 'details' to enter a user's details
-Enter 'quote' to make a new quote
+Enter 'details' to enter a customer's details
+Enter 'quote' to add a new quote
+Enter 'display' to display stored customer details
 Enter 'exit' to quit
 
 >>> """)
@@ -20,6 +23,7 @@ Enter 'exit' to quit
 
         data_to_add = first_name + ", " + last_name + ", " + telephone + ", " + town
         print(data_to_add)
+        externalModules.addingCustomer(data_to_add)
     elif choice == "quote":
         length = float(input("Enter the length of the carpet: "))
         width = float(input("Enter the width of the carpet: "))
@@ -39,6 +43,37 @@ Enter 'exit' to quit
         else:
             print("Incorrect choice")
             continue
+        temp_total_price = price_carpet + price_gripper + underlay_price
+        total_price = round(temp_total_price, 2)
+        
+        print(temp_total_price)
+        break
+    elif choice == "display":
+        customers = []
+        firstNames = []
+        lastNames = []
+        phones = []
+        towns = []
+        try:
+            # Temporarily store the contents of customers file into a variable for easier use later
+            tempCustomers = open("customers.txt", encoding="utf-8").readlines()
+        except FileNotFoundError:
+            print("Customer file not found! Please add a customer (1st choice on the main menu).")
+        for element in tempCustomers:
+            customers.append(element.strip())
+        for iteration, allDetails in enumerate(customers):
+            try:
+                firstName, lastName, phone, town = allDetails.split(", ")
+                firstNames.append(firstName)
+                lastNames.append(lastName)
+                phones.append(phone)
+                towns.append(town)            
+            except ValueError:
+                print(f"\033[1mERROR:\033[0m Invalid song file syntax detected at line: \033[1m{int(iteration) + 1}\033[0m of music.txt file")
+        print(f"first names = {firstNames}")
+        print(f"last names = {lastNames}")
+        print(f"phones = {phones}")
+        print(f"towns = {towns}")
     elif choice  == "exit":
         print("Exiting...")
         exit(0)
