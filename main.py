@@ -1,4 +1,4 @@
-import externalModules
+import time, externalModules
 
 # Main menu
 while True:
@@ -61,6 +61,7 @@ Enter 'exit' to quit
             print("Customer file not found! Please add a customer (1st choice on the main menu).")
         for element in tempCustomers:
             customers.append(element.strip())
+        # Separate each field in the customer text file into separate variables and append them to individual lists
         for iteration, allDetails in enumerate(customers):
             try:
                 firstName, lastName, phone, town = allDetails.split(", ")
@@ -69,11 +70,17 @@ Enter 'exit' to quit
                 phones.append(phone)
                 towns.append(town)            
             except ValueError:
-                print(f"\033[1mERROR:\033[0m Invalid song file syntax detected at line: \033[1m{int(iteration) + 1}\033[0m of music.txt file")
-        print(f"first names = {firstNames}")
-        print(f"last names = {lastNames}")
-        print(f"phones = {phones}")
-        print(f"towns = {towns}")
+                print(f"\033[1mERROR:\033[0m Invalid customer file syntax detected at line: \033[1m{int(iteration) + 1}\033[0m of customers.txt file")
+        # print(f"first names = {firstNames}")
+        # print(f"last names = {lastNames}")
+        # print(f"phones = {phones}")
+        # print(f"towns = {towns}")
+        while True:
+            for iteration_over_people, person in enumerate(range(len(lastNames))):
+                print(f"{iteration_over_people + 1}: {lastNames[person]}, {firstNames[person]}")
+            choose_person = int(input("Choose the number of the person you would like to look-up details on\n>>> ")) - 1
+            time.sleep(0.15)
+            print(f"Details on: \033[1m{firstNames[choose_person]} {lastNames[choose_person]}\033[0m\n\033[1mPhone\033[0m: {phones[choose_person]}\n\033[1mTown\033[0m: {towns[choose_person]}\n")
     elif choice  == "exit":
         print("Exiting...")
         exit(0)
