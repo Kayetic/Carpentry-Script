@@ -8,7 +8,7 @@ Enter 'display' to display stored customer details
 Enter 'exit' to quit
 
 >>> """)
-    if choice == "details":
+    if choice == "new":
         # Entering user details
         first_name = input("Enter the customer's first name: ").title()
         last_name = input("Enter the customer's last name: ").title()
