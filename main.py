@@ -3,8 +3,7 @@ import time, externalModules
 # Main menu
 while True:
     choice = input("""
-Enter 'details' to enter a customer's details
-Enter 'quote' to add a new quote
+Enter 'new' to enter a nw customer's details, and subsequently generate a quote
 Enter 'display' to display stored customer details
 Enter 'exit' to quit
 
@@ -22,9 +21,9 @@ Enter 'exit' to quit
         town = input("Enter the user's town: ").title()
 
         data_to_add = first_name + ", " + last_name + ", " + telephone + ", " + town
-        print(data_to_add)
-        externalModules.addingCustomer(data_to_add)
-    elif choice == "quote":
+        print(f"Saving to file: {data_to_add}")
+        print(f"\nNow you should create a quote for: {first_name} {last_name}")
+        
         length = float(input("Enter the length of the carpet: "))
         width = float(input("Enter the width of the carpet: "))
         carpet_area = length * width
@@ -45,8 +44,11 @@ Enter 'exit' to quit
             continue
         temp_total_price = price_carpet + price_gripper + underlay_price
         total_price = round(temp_total_price, 2)
-        
-        print(temp_total_price)
+        data_to_add_with_quote = first_name + ", " + last_name + ", " + telephone + ", " + town + ", " + str(total_price)
+        externalModules.addingCustomer(data_to_add_with_quote)
+        # Save this amount to the customers file
+        quotes = []
+        print(f"Saved: {first_name} {last_name} with a quote of £{total_price}")
         break
     elif choice == "display":
         customers = []
@@ -54,6 +56,7 @@ Enter 'exit' to quit
         lastNames = []
         phones = []
         towns = []
+        quotes = []
         try:
             # Temporarily store the contents of customers file into a variable for easier use later
             tempCustomers = open("customers.txt", encoding="utf-8").readlines()
@@ -64,11 +67,12 @@ Enter 'exit' to quit
         # Separate each field in the customer text file into separate variables and append them to individual lists
         for iteration, allDetails in enumerate(customers):
             try:
-                firstName, lastName, phone, town = allDetails.split(", ")
+                firstName, lastName, phone, town, quote = allDetails.split(", ")
                 firstNames.append(firstName)
                 lastNames.append(lastName)
                 phones.append(phone)
-                towns.append(town)            
+                towns.append(town)
+                quotes.append(quote)
             except ValueError:
                 print(f"\033[1mERROR:\033[0m Invalid customer file syntax detected at line: \033[1m{int(iteration) + 1}\033[0m of customers.txt file")
         # print(f"first names = {firstNames}")
@@ -76,11 +80,18 @@ Enter 'exit' to quit
         # print(f"phones = {phones}")
         # print(f"towns = {towns}")
         while True:
+            print("Stored customers:")
             for iteration_over_people, person in enumerate(range(len(lastNames))):
                 print(f"{iteration_over_people + 1}: {lastNames[person]}, {firstNames[person]}")
-            choose_person = int(input("Choose the number of the person you would like to look-up details on\n>>> ")) - 1
+            choose_person = input("Choose the number of the person you would like to look-up details on (or do 'exit' to quit)\n>>> ")
+            if choose_person == "exit":
+                break
             time.sleep(0.15)
-            print(f"Details on: \033[1m{firstNames[choose_person]} {lastNames[choose_person]}\033[0m\n\033[1mPhone\033[0m: {phones[choose_person]}\n\033[1mTown\033[0m: {towns[choose_person]}\n")
+            choose_person = int(choose_person) - 1
+            try:
+                print(f"Details on: \033[1m{firstNames[choose_person]} {lastNames[choose_person]}\033[0m\n\033[1mPhone\033[0m: {phones[choose_person]}\n\033[1mTown\033[0m: {towns[choose_person]}\n\033[1mQuote\033[0m: £{quotes[choose_person]}\n")
+            except IndexError:
+                print(f"The number: {choose_person} is not an option, try again.\n")
     elif choice  == "exit":
         print("Exiting...")
         exit(0)
