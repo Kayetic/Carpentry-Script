@@ -1,13 +1,18 @@
-import time, externalModules
+import time
+
+# Function to add a user to the customers file
+def addingCustomer(data_to_add):
+    with open("customers.txt", "a+") as file_object:
+      file_object.seek(0)
+      data = file_object.read(100)
+      if len(data) > 0 :
+          file_object.write("\n")
+      file_object.write(data_to_add)
+      file_object.close()
 
 # Main menu
 while True:
-    choice = input("""
-Enter 'new' to enter a nw customer's details, and subsequently generate a quote
-Enter 'display' to display stored customer details
-Enter 'exit' to quit
-
->>> """)
+    choice = input("Enter 'new' to enter a new customer's details, and subsequently generate a quote\nEnter 'display' to display stored customer details\nEnter 'exit' to quit\n>>> ")
     if choice == "new":
         # Entering user details
         first_name = input("Enter the customer's first name: ").title()
@@ -45,7 +50,7 @@ Enter 'exit' to quit
         temp_total_price = price_carpet + price_gripper + underlay_price
         total_price = round(temp_total_price, 2)
         data_to_add_with_quote = first_name + ", " + last_name + ", " + telephone + ", " + town + ", " + str(total_price)
-        externalModules.addingCustomer(data_to_add_with_quote)
+        addingCustomer(data_to_add_with_quote)
         # Save this amount to the customers file
         quotes = []
         print(f"Saved: {first_name} {last_name} with a quote of £{total_price}")
