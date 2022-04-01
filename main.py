@@ -11,31 +11,31 @@ def addingCustomer(data_to_add):
       file_object.close()
 
 customers = []
-        firstNames = []
-        lastNames = []
-        phones = []
-        towns = []
-        quotes = []
-        try:
-            # Temporarily store the contents of customers file into a variable for easier use later
-            tempCustomers = open("customers.txt", encoding="utf-8").readlines()
-        except FileNotFoundError:
-            print("Customer file not found! Please add a customer (1st choice on the main menu).")
-        for element in tempCustomers:
-            customers.append(element.strip())
-        # Separate each field in the customer text file into separate variables and append them to individual lists
-        for iteration, allDetails in enumerate(customers):
-            try:
-                firstName, lastName, phone, town, quote = allDetails.split(", ")
-                firstNames.append(firstName)
-                lastNames.append(lastName)
-                phones.append(phone)
-                towns.append(town)
-                quotes.append(quote)
-            except ValueError:
-                print(f"\033[1mERROR:\033[0m Invalid customer file syntax detected at line: \033[1m{int(iteration) + 1}\033[0m of customers.txt file")
+firstNames = []
+lastNames = []
+phones = []
+towns = []
+quotes = []
 
-                
+try:
+    # Temporarily store the contents of customers file into a variable for easier use later
+    tempCustomers = open("customers.txt", "a+", encoding="utf-8").readlines()
+except FileNotFoundError:
+    print("Customer file not found! Please add a customer (1st choice on the main menu).")
+for element in tempCustomers:
+    customers.append(element.strip())
+# Separate each field in the customer text file into separate variables and append them to individual lists
+for iteration, allDetails in enumerate(customers):
+    try:
+        firstName, lastName, phone, town, quote = allDetails.split(", ")
+        firstNames.append(firstName)
+        lastNames.append(lastName)
+        phones.append(phone)
+        towns.append(town)
+        quotes.append(quote)
+    except ValueError:
+        print(f"\033[1mERROR:\033[0m Invalid customer file syntax detected at line: \033[1m{int(iteration) + 1}\033[0m of customers.txt file")
+
 # Main menu
 while True:
     choice = input("Enter 'new' to enter a new customer's details, and subsequently generate a quote\nEnter 'display' to display stored customer details\nEnter 'delete' to remove details\nEnter 'exit' to quit\n>>> ")
