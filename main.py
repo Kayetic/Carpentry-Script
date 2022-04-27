@@ -82,10 +82,6 @@ while True:
         print(f"Saved: {first_name} {last_name} with a quote of £{total_price}")
         break
     elif choice == "display":
-        # print(f"first names = {firstNames}")
-        # print(f"last names = {lastNames}")
-        # print(f"phones = {phones}")
-        # print(f"towns = {towns}")
         while True:
             print("Stored customers:")
             for iteration_over_people, person in enumerate(range(len(lastNames))):
