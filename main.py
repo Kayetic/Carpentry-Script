@@ -101,12 +101,4 @@ while True:
     elif choice == "delete":
         for i in range(len(firstNames)):
             print(f"{i}: {firstNames[i]} {lastNames[i]}")
-        choiceDeletion = int(input("Which number to delete: ")) - 1
-        with open("customers.txt","r+") as f:
-            new_f = f.readlines()
-            f.seek(0)
-            for line in new_f:
-                if f"{phones[choiceDeletion]}" in line:
-                    f.write(line)
-            f.truncate()
 exit(0)
