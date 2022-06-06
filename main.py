@@ -1,4 +1,5 @@
 import time
+import requests
 
 # Function to add a user to the customers file
 def addingCustomer(data_to_add):
@@ -51,15 +52,20 @@ while True:
             telephone = str(telephone)
         try:
             int(telephone)
-        except (TypeError or ValueError):
+        except ValueError or TypeError:
             print("Incorrect phone number, try again")
-            exit(0)
+            continue
         town = input("Enter the user's town: ").title()
 
         data_to_add = first_name + ", " + last_name + ", " + telephone + ", " + town
         print(f"Saving to file: {data_to_add}")
         print(f"\nNow you should create a quote for: {first_name} {last_name}")
         length = float(input("Enter the length of the carpet: "))
+        try :
+            int(length)
+        except ValueError or TypeError:
+            print("Incorrect length, try again")
+            continue
         if length == 0:
             print("\n\033[1mERROR:\033[0m Invalid length")
             continue
