@@ -40,7 +40,12 @@ for iteration, allDetails in enumerate(customers):
 while True:
     os.system("clear")
     print("\033[1mMain Menu:\033[0m")
-    choice = input("Enter 'new' to enter a new customer's details, and subsequently generate a quote\nEnter 'display' to display stored customer details\nEnter 'delete' to remove details\nEnter 'exit' to quit\n>>> ")
+    choice = input("""
+Enter 'new' to enter a new customer's details, and subsequently generate a quote
+Enter 'display' to display stored customer details
+Enter 'delete' to remove details
+Enter 'exit' to quit
+>>> """)
     if choice == "new":
         # Entering user details
         os.system("clear")
@@ -74,7 +79,10 @@ while True:
         length = float(input("Enter the length of the carpet: "))
         try :
             int(length)
-        except ValueError or TypeError:
+        except ValueError:
+            print("Incorrect length, try again")
+            continue
+        except TypeError:
             print("Incorrect length, try again")
             continue
         if length == 0:
@@ -114,19 +122,19 @@ while True:
             print("Incorrect choice")
             continue
         temp_total_price = price_carpet + price_gripper + underlay_price
-        total_price = round(temp_total_price, 2)
-        data_to_add_with_quote = first_name + ", " + last_name + ", " + telephone + ", " + town + ", " + str(total_price)
+        TOTAL_PRICE = str(round(temp_total_price, 2))
+        data_to_add_with_quote = f'{first_name}, {last_name}, {telephone}, {town}, {TOTAL_PRICE}'
         addingCustomer(data_to_add_with_quote)
         # Save this amount to the customers file
         quotes = []
-        print(f"Saved: {first_name} {last_name} with a quote of £{total_price}")
+        print(f"Saved: {first_name} {last_name} with a quote of £{TOTAL_PRICE}")
         break
     elif choice == "display":
         while True:
             print("Stored customers:")
             for iteration_over_people, person in enumerate(range(len(lastNames))):
                 print(f"{iteration_over_people + 1}: {lastNames[person]}, {firstNames[person]}")
-            choose_person = input("Choose the number of the person you would like to look-up details on (or do 'exit' to quit)\n>>> ")
+            choose_person = input("Choose person (number) to look-up details (or do 'exit' to quit)\n>>> ")
             if choose_person == "exit":
                 break
             time.sleep(0.15)
