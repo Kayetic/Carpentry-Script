@@ -1,5 +1,4 @@
-import time
-import requests
+import time, os
 
 # Function to add a user to the customers file
 def addingCustomer(data_to_add):
@@ -10,6 +9,30 @@ def addingCustomer(data_to_add):
             file_object.write("\n")
         file_object.write(data_to_add)
         file_object.close()
+
+def validate_phone(phone):
+    if len(phone) == 11 and phone.isdigit():
+        return True
+    else:
+        return False
+
+def validate_town(town):
+    if (len(town) > 0) and town.isalpha():
+        return True
+    else:
+        return False
+
+def validate_first_name(name):
+    if (len(name) > 0) and name.isalpha():
+        return True
+    else:
+        return False
+
+def validate_last_name(name):
+    if (len(name) > 0) and name.isalpha():
+        return True
+    else:
+        return False
 
 customers = []
 firstNames = []
@@ -25,7 +48,7 @@ except FileNotFoundError:
     print("Customer file not found! Please add a customer (1st choice on the main menu).")
 for element in tempCustomers:
     customers.append(element.strip())
-# Separate each field in the customer text file into separate variables and append them to individual lists
+# Separate each field in the customer text file into separate variables and append them to lists
 for iteration, allDetails in enumerate(customers):
     try:
         firstName, lastName, phone, town, quote = allDetails.split(", ")
@@ -39,24 +62,36 @@ for iteration, allDetails in enumerate(customers):
 
 ### Main menu ###
 while True:
+    os.system("clear")
+    print("\033[1mMain Menu:\033[0m")
     choice = input("Enter 'new' to enter a new customer's details, and subsequently generate a quote\nEnter 'display' to display stored customer details\nEnter 'delete' to remove details\nEnter 'exit' to quit\n>>> ")
     if choice == "new":
         # Entering user details
+        os.system("clear")
         first_name = input("Enter the customer's first name: ").title()
-        last_name = input("Enter the customer's last name: ").title()
-        telephone = input("Enter the customer's telephone number: ")
-        if (len(telephone) > 13) or (len(telephone) < 11):
-            print("\n\033[1mERROR:\033[0m Invalid telephone number")
+        if validate_first_name(first_name) is False:
+            print("\n\033[1mERROR:\033[0m Invalid first name")
+            time.sleep(1)
             continue
-        else:
-            telephone = str(telephone)
-        try:
-            int(telephone)
-        except ValueError or TypeError:
-            print("Incorrect phone number, try again")
+        last_name = input("Enter the customer's last name: ").title()
+        if validate_last_name(last_name) is False:
+            print("\n\033[1mERROR:\033[0m Invalid last name")
+            time.sleep(1)
+            continue
+        if last_name.isalpha() is False:
+            print("\n\033[1mERROR:\033[0m Last name must be alphabetical")
+            time.sleep(1)
+            continue
+        telephone = input("Enter the customer's telephone number: ")
+        if validate_phone(telephone) is False:
+            print("\n\033[1mERROR:\033[0m Invalid phone number entered. Please try again.")
+            time.sleep(1)
             continue
         town = input("Enter the user's town: ").title()
-
+        if validate_town(town) is False:
+            print("\n\033[1mERROR:\033[0m Invalid town name entered. Please try again.")
+            time.sleep(1)
+            continue
         data_to_add = first_name + ", " + last_name + ", " + telephone + ", " + town
         print(f"Saving to file: {data_to_add}")
         print(f"\nNow you should create a quote for: {first_name} {last_name}")
@@ -128,6 +163,5 @@ while True:
         print("Exiting...")
         exit(0)
     elif choice == "delete":
-        for i in range(len(firstNames)):
-            print(f"{i}: {firstNames[i]} {lastNames[i]}")
+        print("\nNot implemented yet")
 exit(0)
