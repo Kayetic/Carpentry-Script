@@ -3,12 +3,12 @@ import time
 # Function to add a user to the customers file
 def addingCustomer(data_to_add):
     with open("customers.txt", "a+") as file_object:
-      file_object.seek(0)
-      data = file_object.read(100)
-      if len(data) > 0 :
-          file_object.write("\n")
-      file_object.write(data_to_add)
-      file_object.close()
+        file_object.seek(0)
+        data = file_object.read(100)
+        if len(data) > 0 :
+            file_object.write("\n")
+        file_object.write(data_to_add)
+        file_object.close()
 
 customers = []
 firstNames = []
@@ -36,14 +36,21 @@ for iteration, allDetails in enumerate(customers):
     except ValueError:
         print(f"\033[1mERROR:\033[0m Invalid customer file syntax detected at line: \033[1m{int(iteration) + 1}\033[0m of customers.txt file")
 
-# Main menu
+### Main menu ###
 while True:
     choice = input("Enter 'new' to enter a new customer's details, and subsequently generate a quote\nEnter 'display' to display stored customer details\nEnter 'delete' to remove details\nEnter 'exit' to quit\n>>> ")
     if choice == "new":
         # Entering user details
         first_name = input("Enter the customer's first name: ").title()
         last_name = input("Enter the customer's last name: ").title()
-        telephone = input("Enter the customer's telephone number: ")
+        telephone = int(input("Enter the customer's telephone number: "))
+        print(telephone)
+        print(type(telephone))
+        if telephone > 11:
+            print("\033[1mERROR:\033[0m Invalid telephone number")
+            continue
+        else:
+            telephone = str(telephone)
         try:
             int(telephone)
         except (TypeError or ValueError):
@@ -54,7 +61,6 @@ while True:
         data_to_add = first_name + ", " + last_name + ", " + telephone + ", " + town
         print(f"Saving to file: {data_to_add}")
         print(f"\nNow you should create a quote for: {first_name} {last_name}")
-        
         length = float(input("Enter the length of the carpet: "))
         width = float(input("Enter the width of the carpet: "))
         carpet_area = length * width
