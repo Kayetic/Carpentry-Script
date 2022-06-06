@@ -1,38 +1,14 @@
-import time, os
+import time, os, validation_modules
 
 # Function to add a user to the customers file
 def addingCustomer(data_to_add):
-    with open("customers.txt", "a+") as file_object:
+    with open("customers.txt", "a+", encoding='utf-8') as file_object:
         file_object.seek(0)
         data = file_object.read(100)
         if len(data) > 0 :
             file_object.write("\n")
         file_object.write(data_to_add)
         file_object.close()
-
-def validate_phone(phone):
-    if len(phone) == 11 and phone.isdigit():
-        return True
-    else:
-        return False
-
-def validate_town(town):
-    if (len(town) > 0) and town.isalpha():
-        return True
-    else:
-        return False
-
-def validate_first_name(name):
-    if (len(name) > 0) and name.isalpha():
-        return True
-    else:
-        return False
-
-def validate_last_name(name):
-    if (len(name) > 0) and name.isalpha():
-        return True
-    else:
-        return False
 
 customers = []
 firstNames = []
@@ -69,12 +45,12 @@ while True:
         # Entering user details
         os.system("clear")
         first_name = input("Enter the customer's first name: ").title()
-        if validate_first_name(first_name) is False:
+        if validation_modules.validate_first_name(first_name) is False:
             print("\n\033[1mERROR:\033[0m Invalid first name")
             time.sleep(1)
             continue
         last_name = input("Enter the customer's last name: ").title()
-        if validate_last_name(last_name) is False:
+        if validation_modules.validate_last_name(last_name) is False:
             print("\n\033[1mERROR:\033[0m Invalid last name")
             time.sleep(1)
             continue
@@ -83,12 +59,12 @@ while True:
             time.sleep(1)
             continue
         telephone = input("Enter the customer's telephone number: ")
-        if validate_phone(telephone) is False:
+        if validation_modules.validate_phone(telephone) is False:
             print("\n\033[1mERROR:\033[0m Invalid phone number entered. Please try again.")
             time.sleep(1)
             continue
         town = input("Enter the user's town: ").title()
-        if validate_town(town) is False:
+        if validation_modules.validate_town(town) is False:
             print("\n\033[1mERROR:\033[0m Invalid town name entered. Please try again.")
             time.sleep(1)
             continue
