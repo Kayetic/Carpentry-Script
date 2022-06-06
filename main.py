@@ -43,11 +43,9 @@ while True:
         # Entering user details
         first_name = input("Enter the customer's first name: ").title()
         last_name = input("Enter the customer's last name: ").title()
-        telephone = int(input("Enter the customer's telephone number: "))
-        print(telephone)
-        print(type(telephone))
-        if telephone > 11:
-            print("\033[1mERROR:\033[0m Invalid telephone number")
+        telephone = input("Enter the customer's telephone number: ")
+        if (len(telephone) > 13) or (len(telephone) < 11):
+            print("\n\033[1mERROR:\033[0m Invalid telephone number")
             continue
         else:
             telephone = str(telephone)
@@ -62,7 +60,26 @@ while True:
         print(f"Saving to file: {data_to_add}")
         print(f"\nNow you should create a quote for: {first_name} {last_name}")
         length = float(input("Enter the length of the carpet: "))
+        if length == 0:
+            print("\n\033[1mERROR:\033[0m Invalid length")
+            continue
+        if length > 10000:
+            print("\n\033[1mERROR:\033[0m Length must be less than 10,000")
+            continue
+        if length < 0.1:
+            print("\n\033[1mERROR:\033[0m Length must be greater than 0.1m")
+            continue
+
         width = float(input("Enter the width of the carpet: "))
+        if width == 0:
+            print("\n\033[1mERROR:\033[0m Invalid width")
+            continue
+        if width > 10000:
+            print("\n\033[1mERROR:\033[0m Width must be less than 10,000")
+            continue
+        if width < 0.1:
+            print("\n\033[1mERROR:\033[0m Width must be greater than 0.1m")
+            continue
         carpet_area = length * width
         underlay_area = carpet_area
         gripper_length = (2*length + 2*width)
