@@ -1,4 +1,10 @@
 import time, os, external_modules
+from signal import signal, SIGINT
+
+def handler(signal_received, frame):
+    # Handling any cleanup here
+    print('\nCTRL-C or SIGINT detected. Exiting gracefully...')
+    exit(0)
 
 customers = []
 firstNames = []
@@ -28,6 +34,7 @@ for iteration, allDetails in enumerate(customers):
 
 ### Main menu ###
 while True:
+    signal(SIGINT, handler)
     os.system("clear")
     print("\033[1mMain Menu:\033[0m")
     choice = input("""
