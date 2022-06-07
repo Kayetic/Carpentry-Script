@@ -38,7 +38,7 @@ for iteration, allDetails in enumerate(customers):
 ### Main menu ###
 while True:
     signal(SIGINT, handler)
-    os.system("cls")
+    os.system("cls") if 'Windows' in platform.system() else os.system("clear")
     console.print("Main Menu:", style="bold underline green") 
     choice = input("""
 Enter '\033[1mnew\033[0m' to enter a new customer's details, and subsequently generate a quote
@@ -48,7 +48,7 @@ Enter '\033[1mexit\033[0m' to quit
 >>> """)
     if choice == "new":
         # Entering user details
-        os.system("clear")
+        os.system("cls") if 'Windows' in platform.system() else os.system("clear")
         first_name = input("Enter the customer's first name: ").title()
         if external_modules.validate_first_name(first_name) is False:
             print("\n\033[1mERROR:\033[0m Invalid first name")
