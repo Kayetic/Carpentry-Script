@@ -1,5 +1,5 @@
-import time, os, external_modules, platform
 from signal import signal, SIGINT
+import time, os, external_modules, platform
 from rich.console import Console
 
 console = Console()
