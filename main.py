@@ -130,22 +130,10 @@ Enter '\033[1mexit\033[0m' to quit
         print(f"Saved: {first_name} {last_name} with a quote of £{TOTAL_PRICE}")
         break
     elif choice == "display":
-        while True:
-            print("Stored customers:")
-            for iteration_over_people, person in enumerate(range(len(lastNames))):
-                print(f"{iteration_over_people + 1}: {lastNames[person]}, {firstNames[person]}")
-            choose_person = input("Choose person (number) to look-up details (or do 'exit' to quit)\n>>> ")
-            if choose_person == "exit":
-                break
-            time.sleep(0.15)
-            choose_person = int(choose_person) - 1
-            try:
-                print(f"Details on: \033[1m{firstNames[choose_person]} {lastNames[choose_person]}\033[0m\n\033[1mPhone\033[0m: {phones[choose_person]}\n\033[1mTown\033[0m: {towns[choose_person]}\n\033[1mQuote\033[0m: £{quotes[choose_person]}\n")
-            except IndexError:
-                print(f"The number: {choose_person} is not an option, try again.\n")
+        print("\nNot yet implemented")
     elif choice  == "exit":
         print("Exiting...")
         exit(0)
     elif choice == "delete":
-        print("\nNot implemented yet")
+        print("\nNot yet implemented")
 exit(0)
