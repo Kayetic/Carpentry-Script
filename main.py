@@ -114,7 +114,7 @@ Enter 'exit' to quit
         temp_total_price = price_carpet + price_gripper + underlay_price
         TOTAL_PRICE = str(round(temp_total_price, 2))
         data_to_add_with_quote = f'{first_name}, {last_name}, {telephone}, {town}, {TOTAL_PRICE}'
-        adding_customer(data_to_add_with_quote)
+        external_modules.append_to_file('customers.txt', data_to_add_with_quote)
         # Save this amount to the customers file
         quotes = []
         print(f"Saved: {first_name} {last_name} with a quote of £{TOTAL_PRICE}")
