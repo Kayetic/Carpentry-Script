@@ -1,5 +1,8 @@
-import time, os, external_modules
+import time, os, external_modules, platform
 from signal import signal, SIGINT
+from rich.console import Console
+
+console = Console()
 
 def handler(signal_received, frame):
     # Handling any cleanup here
@@ -35,13 +38,13 @@ for iteration, allDetails in enumerate(customers):
 ### Main menu ###
 while True:
     signal(SIGINT, handler)
-    os.system("clear")
-    print("\033[1mMain Menu:\033[0m")
+    os.system("cls")
+    console.print("Main Menu:", style="bold underline green") 
     choice = input("""
-Enter 'new' to enter a new customer's details, and subsequently generate a quote
-Enter 'display' to display stored customer details
-Enter 'delete' to remove details
-Enter 'exit' to quit
+Enter '\033[1mnew\033[0m' to enter a new customer's details, and subsequently generate a quote
+Enter '\033[1mdisplay\033[0m' to display stored customer details
+Enter '\033[1mdelete\033[0m' to remove details
+Enter '\033[1mexit\033[0m' to quit
 >>> """)
     if choice == "new":
         # Entering user details
