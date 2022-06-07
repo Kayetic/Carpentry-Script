@@ -1,14 +1,4 @@
-import time, os, validation_modules
-
-# Function to add a user to the customers file
-def adding_customer(data_to_write):
-    with open("customers.txt", "a+", encoding='utf-8') as file_object:
-        file_object.seek(0)
-        data = file_object.read(100)
-        if len(data) > 0 :
-            file_object.write("\n")
-        file_object.write(data_to_write)
-        file_object.close()
+import time, os, external_modules
 
 customers = []
 firstNames = []
@@ -50,12 +40,12 @@ Enter 'exit' to quit
         # Entering user details
         os.system("clear")
         first_name = input("Enter the customer's first name: ").title()
-        if validation_modules.validate_first_name(first_name) is False:
+        if external_modules.validate_first_name(first_name) is False:
             print("\n\033[1mERROR:\033[0m Invalid first name")
             time.sleep(1)
             continue
         last_name = input("Enter the customer's last name: ").title()
-        if validation_modules.validate_last_name(last_name) is False:
+        if external_modules.validate_last_name(last_name) is False:
             print("\n\033[1mERROR:\033[0m Invalid last name")
             time.sleep(1)
             continue
@@ -64,12 +54,12 @@ Enter 'exit' to quit
             time.sleep(1)
             continue
         telephone = input("Enter the customer's telephone number: ")
-        if validation_modules.validate_phone(telephone) is False:
+        if external_modules.validate_phone(telephone) is False:
             print("\n\033[1mERROR:\033[0m Invalid phone number entered. Please try again.")
             time.sleep(1)
             continue
         town = input("Enter the user's town: ").title()
-        if validation_modules.validate_town(town) is False:
+        if external_modules.validate_town(town) is False:
             print("\n\033[1mERROR:\033[0m Invalid town name entered. Please try again.")
             time.sleep(1)
             continue
