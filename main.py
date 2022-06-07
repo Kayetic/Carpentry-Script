@@ -1,13 +1,13 @@
 import time, os, validation_modules
 
 # Function to add a user to the customers file
-def addingCustomer(data_to_add):
+def adding_customer(data_to_write):
     with open("customers.txt", "a+", encoding='utf-8') as file_object:
         file_object.seek(0)
         data = file_object.read(100)
         if len(data) > 0 :
             file_object.write("\n")
-        file_object.write(data_to_add)
+        file_object.write(data_to_write)
         file_object.close()
 
 customers = []
@@ -124,7 +124,7 @@ Enter 'exit' to quit
         temp_total_price = price_carpet + price_gripper + underlay_price
         TOTAL_PRICE = str(round(temp_total_price, 2))
         data_to_add_with_quote = f'{first_name}, {last_name}, {telephone}, {town}, {TOTAL_PRICE}'
-        addingCustomer(data_to_add_with_quote)
+        adding_customer(data_to_add_with_quote)
         # Save this amount to the customers file
         quotes = []
         print(f"Saved: {first_name} {last_name} with a quote of £{TOTAL_PRICE}")
