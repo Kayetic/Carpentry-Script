@@ -124,10 +124,10 @@ Enter '\033[1mexit\033[0m' to quit
         temp_total_price = price_carpet + price_gripper + underlay_price
         TOTAL_PRICE = str(round(temp_total_price, 2))
         data_to_add_with_quote = f'{first_name}, {last_name}, {telephone}, {town}, {TOTAL_PRICE}'
+        # Saving this amount to the text file
         external_modules.append_to_file('customers.txt', data_to_add_with_quote)
-        # Save this amount to the customers file
-        quotes = []
-        print(f"Saved: {first_name} {last_name} with a quote of £{TOTAL_PRICE}")
+        # Save this amount to th
+        print(f"Save{first_name} {last_name} with a quote of £{TOTAL_PRICE}")
         break
     elif choice == "display":
         print("\nNot yet implemented")
