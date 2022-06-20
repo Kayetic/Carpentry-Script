@@ -133,6 +133,7 @@ Enter '\033[1mexit\033[0m' to quit
         data_to_add_with_quote = temp_details.append(TOTAL_PRICE)
         # Saving this amount to the text file
         # external_modules.append_to_file('customers.txt', data_to_add_with_quote)
+        print(data_to_add_with_quote)
         external_modules.writing_data_csv('customers.csv', data_to_add_with_quote)
         print(f"Save{first_name} {last_name} with a quote of £{TOTAL_PRICE}")
         break
