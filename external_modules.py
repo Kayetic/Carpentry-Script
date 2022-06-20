@@ -40,7 +40,7 @@ def append_to_file(filename, data_to_write):
         file_object.write(data_to_write)
         file_object.close()
 
-def writing_data(filename, data_to_write):
+def writing_data_csv(filename, data_to_write):
     """
     Function to write data to csv file
     Parameters: filename (string) - the name of the file to be read
@@ -60,7 +60,7 @@ def writing_data(filename, data_to_write):
             csvwriter2.writerows(data_to_write) # 2. write the rows, without the header
             appending_file.close() # 3. close the file
 
-def reading_data(filename):
+def reading_data_csv(filename):
     """
     Reads the data from the csv file and returns a header and a list of rows (both as lists)
     Parameters: filename (string) - the name of the file to be read
