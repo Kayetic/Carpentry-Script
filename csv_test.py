@@ -21,27 +21,33 @@ while True:
         break
 
 
-def writing_data(data_to_write):
-    file_exists = exists('data.csv')
+def writing_data_csv(filename, data_to_write):
+    """
+    Function to write data to csv file
+    Parameters: filename (string) - the name of the file to be read
+                data_to_write (string) - the data to be written (or appended) to the file
+    """
+    file_exists = exists(filename)
     if file_exists is False:
         header = ['first_name', 'last_name', 'telephone', 'town']
-        with open('data.csv', 'w+', newline="", encoding='utf-8') as writing_file:
+        with open(filename, 'w+', newline="", encoding='utf-8') as writing_file:
             csvwriter1 = csv.writer(writing_file) # 1. create a csvwriter object
             csvwriter1.writerow(header) # 2. write the header
             csvwriter1.writerows(data_to_write) # 3. write the rest of the data
             writing_file.close() # 4. close the file
     else:
-        with open('data.csv', 'a', newline="", encoding='utf-8') as appending_file:
+        with open(filename, 'a', newline="", encoding='utf-8') as appending_file:
             csvwriter2 = csv.writer(appending_file) # 1. create a csvwriter object
             csvwriter2.writerows(data_to_write) # 2. write the rows, without the header
             appending_file.close() # 3. close the file
 
 
-def reading_data():
+def reading_data_csv(filename):
     """
-    Reads the data from the csv file and returns it as a list of lists.
+    Reads the data from the csv file and returns a header and a list of rows (both as lists)
+    Parameters: filename (string) - the name of the file to be read
     """
-    with open('data.csv', 'r', encoding='utf-8') as read_file:
+    with open(filename, 'r', encoding='utf-8') as read_file:
         content = read_file.readlines()
     read_header = content[:1]
     read_rows = content[1:]
