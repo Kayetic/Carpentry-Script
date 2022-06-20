@@ -5,8 +5,9 @@ header = ['first_name', 'last_name', 'telephone', 'town']
 file_exists = exists('data.csv')
 if file_exists is False:
     print("\n\033[1mCreating file\033[0m")
-    with open('data.csv', 'w+') as file:
-        csv.writer.writerow(header)
+    with open('data.csv', 'w+', encoding='utf8') as file:
+        csvwriter = csv.writer(file)
+        csvwriter.writerow(header)
         file.close()
 
 
@@ -28,5 +29,11 @@ while True:
     if to_continue == "N":
         break
 
+with open('data.csv', 'r', encoding='utf-8') as read_file:
+    content = read_file.readlines()
+read_header = content[:1]
+read_rows = content[1:]
 
-print(array)
+with open('data.csv', 'w+', newline="") as writing_file:
+    csvwriter = csv.writer(writing_file) # 2. create a csvwriter object
+    csvwriter.writerows(array) # 5. write the rest of the data
