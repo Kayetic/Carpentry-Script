@@ -48,12 +48,15 @@ Enter '\033[1mexit\033[0m' to quit
 >>> """)
     if choice == "new":
         # Entering user details
+        temp_details = []
         os.system("cls") if 'Windows' in platform.system() else os.system("clear")
         first_name = input("Enter the customer's first name: ").title()
         if external_modules.validate_first_name(first_name) is False:
             print("\n\033[1mERROR:\033[0m Invalid first name")
             time.sleep(1)
             continue
+        else:
+            temp_details.append(first_name)
         last_name = input("Enter the customer's last name: ").title()
         if external_modules.validate_last_name(last_name) is False:
             print("\n\033[1mERROR:\033[0m Invalid last name")
@@ -63,17 +66,21 @@ Enter '\033[1mexit\033[0m' to quit
             print("\n\033[1mERROR:\033[0m Last name must be alphabetical")
             time.sleep(1)
             continue
+        temp_details.append(last_name)
         telephone = input("Enter the customer's telephone number: ")
         if external_modules.validate_phone(telephone) is False:
             print("\n\033[1mERROR:\033[0m Invalid phone number entered. Please try again.")
             time.sleep(1)
             continue
+        else:
+            temp_details.append(telephone)
         town = input("Enter the user's town: ").title()
         if external_modules.validate_town(town) is False:
             print("\n\033[1mERROR:\033[0m Invalid town name entered. Please try again.")
             time.sleep(1)
             continue
-        data_to_add = first_name + ", " + last_name + ", " + telephone + ", " + town
+        else:
+            temp_details.append(town)
         print(f"Saving to file: {data_to_add}")
         print(f"\nNow you should create a quote for: {first_name} {last_name}")
         length = float(input("Enter the length of the carpet: "))

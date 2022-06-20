@@ -21,20 +21,20 @@ while True:
         break
 
 
-
-FILE_EXISTS = exists('data.csv')
-if FILE_EXISTS is False:
-    header = ['first_name', 'last_name', 'telephone', 'town']
-    with open('data.csv', 'w+', newline="", encoding='utf-8') as writing_file:
-        csvwriter1 = csv.writer(writing_file) # 2. create a csvwriter object
-        csvwriter1.writerow(header) # 4. write the header
-        csvwriter1.writerows(data_to_write) # 5. write the rest of the data
-        writing_file.close()
-else:
-    with open('data.csv', 'a', newline="", encoding='utf-8') as appending_file:
-        csvwriter2 = csv.writer(appending_file)
-        csvwriter2.writerows(data_to_write)
-        appending_file.close()
+def writing_data(data_to_write):
+    file_exists = exists('data.csv')
+    if file_exists is False:
+        header = ['first_name', 'last_name', 'telephone', 'town']
+        with open('data.csv', 'w+', newline="", encoding='utf-8') as writing_file:
+            csvwriter1 = csv.writer(writing_file) # 1. create a csvwriter object
+            csvwriter1.writerow(header) # 2. write the header
+            csvwriter1.writerows(data_to_write) # 3. write the rest of the data
+            writing_file.close() # 4. close the file
+    else:
+        with open('data.csv', 'a', newline="", encoding='utf-8') as appending_file:
+            csvwriter2 = csv.writer(appending_file) # 1. create a csvwriter object
+            csvwriter2.writerows(data_to_write) # 2. write the rows, without the header
+            appending_file.close() # 3. close the file
 
 
 def reading_data():
