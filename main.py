@@ -38,7 +38,7 @@ for iteration, allDetails in enumerate(customers):
 ### Main menu ###
 while True:
     signal(SIGINT, handler)
-    os.system("cls") if 'Windows' in platform.system() else os.system("clear")
+    # os.system("cls") if 'Windows' in platform.system() else os.system("clear")
     console.print("Main Menu:", style="bold underline green") 
     choice = input("""
 Enter '\033[1mnew\033[0m' to enter a new customer's details, and subsequently generate a quote
@@ -46,10 +46,11 @@ Enter '\033[1mdisplay\033[0m' to display stored customer details
 Enter '\033[1mdelete\033[0m' to remove details
 Enter '\033[1mexit\033[0m' to quit
 >>> """)
+    print(choice)
     if choice == "new":
         # Entering user details
         temp_details = []
-        os.system("cls") if 'Windows' in platform.system() else os.system("clear")
+        # os.system("cls") if 'Windows' in platform.system() else os.system("clear")
         first_name = input("Enter the customer's first name: ").title()
         if external_modules.validate_first_name(first_name) is False:
             print("\n\033[1mERROR:\033[0m Invalid first name")
@@ -138,7 +139,13 @@ Enter '\033[1mexit\033[0m' to quit
         print(f"Save{first_name} {last_name} with a quote of £{TOTAL_PRICE}")
         break
     elif choice == "display":
-        print("\nNot yet implemented")
+        print('WORKING')
+        file_headers, file_rows = external_modules.reading_data_csv('data.csv')
+        print(file_headers)
+        print(type(file_headers))
+        print('')
+        print(file_rows)
+        print(type(file_rows))
     elif choice  == "exit":
         print("Exiting...")
         exit(0)

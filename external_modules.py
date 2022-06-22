@@ -70,4 +70,7 @@ def reading_data_csv(filename):
     read_header = content[:1]
     read_rows = content[1:]
     read_file.close()
+    read_header[-1] = read_header[-1].strip()
+    for i in range(len(read_rows)):
+        read_rows[i] = read_rows[i].strip()
     return read_header, read_rows
