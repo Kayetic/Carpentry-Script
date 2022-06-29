@@ -110,10 +110,7 @@ Enter '\033[1mexit\033[0m' to quit
         TOTAL_PRICE = str(round(temp_total_price, 2))
         temp_details.append(TOTAL_PRICE)
         data_to_add_with_quote = temp_details
-        # Saving this amount to the text file
-        print(temp_details)
-        print(data_to_add_with_quote)
-        print(type(data_to_add_with_quote))
+        # Saving this amount to the csv file
         external_modules.writing_data_csv('customers.csv', data_to_add_with_quote)
         print(f"Save{first_name} {last_name} with a quote of £{TOTAL_PRICE}")
         break
@@ -183,7 +180,7 @@ Enter '\033[1mexit\033[0m' to quit
             customer_data.drop(customer_data.index[int(choice)-1], inplace=True)
         customer_data.to_csv("customers.csv", index=False)
         print("\n\033[1mCustomer deleted\033[0m")
-        temp_choice = input("Press enter to continue")
+        temp_choice = input("Press enter to continue\n")
         continue
     elif choice  == "exit":
         print("Exiting...")
