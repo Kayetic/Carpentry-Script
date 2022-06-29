@@ -1,8 +1,6 @@
 from signal import signal, SIGINT
 import time, external_modules, platform
 
-console = Console()
-
 def handler(signal_received, frame):
     # Handling any cleanup here
     print('\nCTRL-C or SIGINT detected. Exiting gracefully...')
