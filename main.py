@@ -1,5 +1,5 @@
 from signal import signal, SIGINT
-import time, os, external_modules, platform
+import time, os, external_modules, platform, pandas
 
 def handler(signal_received, frame):
     # Handling any cleanup here
@@ -148,9 +148,10 @@ Enter '\033[1mexit\033[0m' to quit
                 break
             else:
                 continue
+    elif choice == "delete":
+        # print("\nNot yet implemented")
+        customer_data = pandas.read_csv("customers.csv")
     elif choice  == "exit":
         print("Exiting...")
         exit(0)
-    elif choice == "delete":
-        print("\nNot yet implemented")
 exit(0)
