@@ -131,10 +131,13 @@ Enter '\033[1mexit\033[0m' to quit
             continue
         temp_total_price = price_carpet + price_gripper + underlay_price
         TOTAL_PRICE = str(round(temp_total_price, 2))
-        data_to_add_with_quote = temp_details.append(TOTAL_PRICE)
+        temp_details.append(TOTAL_PRICE)
+        data_to_add_with_quote = temp_details
         # Saving this amount to the text file
         # external_modules.append_to_file('customers.txt', data_to_add_with_quote)
+        print(temp_details)
         print(data_to_add_with_quote)
+        print(type(data_to_add_with_quote))
         external_modules.writing_data_csv('customers.csv', data_to_add_with_quote)
         print(f"Save{first_name} {last_name} with a quote of £{TOTAL_PRICE}")
         break
