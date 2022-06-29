@@ -121,6 +121,10 @@ Enter '\033[1mexit\033[0m' to quit
         while True:
             os.system("cls") if 'Windows' in platform.system() else os.system("clear")
             file_headers, file_rows = external_modules.reading_data_csv('customers.csv')
+            if file_rows == []:
+                print("No customers found")
+                temp_choice = input("\nPress \033[1menter\033[0m to return to the main menu\n")
+                break
             print("Choose a customer's number to see more info:")
             fnames = []
             lnames = []
