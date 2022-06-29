@@ -1,5 +1,5 @@
 from signal import signal, SIGINT
-import time, external_modules, platform
+import time, os, external_modules, platform
 
 def handler(signal_received, frame):
     # Handling any cleanup here
@@ -16,7 +16,7 @@ quotes = []
 ### Main menu ###
 while True:
     signal(SIGINT, handler)
-    # os.system("cls") if 'Windows' in platform.system() else os.system("clear")
+    os.system("cls") if 'Windows' in platform.system() else os.system("clear")
     print("\033[1\033[92mMain menu:\033[00m\033[0m")
     choice = input("""
 Enter '\033[1mnew\033[0m' to enter a new customer's details, and subsequently generate a quote
@@ -24,11 +24,10 @@ Enter '\033[1mdisplay\033[0m' to display stored customer details
 Enter '\033[1mdelete\033[0m' to remove details
 Enter '\033[1mexit\033[0m' to quit
 >>> """)
-    print(choice)
     if choice == "new":
         # Entering user details
         temp_details = []
-        # os.system("cls") if 'Windows' in platform.system() else os.system("clear")
+        os.system("cls") if 'Windows' in platform.system() else os.system("clear")
         first_name = input("Enter the customer's first name: ").title()
         if external_modules.validate_first_name(first_name) is False:
             print("\n\033[1mERROR:\033[0m Invalid first name")
@@ -119,13 +118,33 @@ Enter '\033[1mexit\033[0m' to quit
         print(f"Save{first_name} {last_name} with a quote of £{TOTAL_PRICE}")
         break
     elif choice == "display":
-        print('WORKING')
-        file_headers, file_rows = external_modules.reading_data_csv('data.csv')
-        print(file_headers)
-        print(type(file_headers))
-        print('')
-        print(file_rows)
-        print(type(file_rows))
+        while True:
+            os.system("cls") if 'Windows' in platform.system() else os.system("clear")
+            file_headers, file_rows = external_modules.reading_data_csv('customers.csv')
+            print("Choose a customer's number to see more info:")
+            fnames = []
+            lnames = []
+            phones = []
+            towns = []
+            quotes = []
+            for row in file_rows:
+                fname, lname, phone, town, money = row.split(',')
+                fnames.append(fname); lnames.append(lname); phones.append(phone); towns.append(town); quotes.append(money)
+            for i in range(len(fnames)):
+                print(f"{i+1} - {fnames[i]} {lnames[i]}")
+            choice = int(input(">>> "))
+            if choice > len(fnames):
+                print("\n\033[1mERROR:\033[0m Invalid choice")
+                continue
+            else:
+                os.system("cls") if 'Windows' in platform.system() else os.system("clear")
+                print(f"\n\033[1mCustomer's details:\033[0m\nFirst name: {fnames[choice-1]}\nLast name: {lnames[choice-1]}\nPhone number: {phones[choice-1]}\nTown: {towns[choice-1]}\nQuote: £{quotes[choice-1]}")
+            print("\n\033[1mEnter '\033[0mback\033[1m' to go back\033[0m or press any key to choose another customer")
+            choice = input(">>> ")
+            if choice == "back":
+                break
+            else:
+                continue
     elif choice  == "exit":
         print("Exiting...")
         exit(0)
