@@ -1,5 +1,4 @@
 from signal import signal, SIGINT
-from rich.console import Console
 import time, external_modules, platform
 
 console = Console()
@@ -20,7 +19,7 @@ quotes = []
 while True:
     signal(SIGINT, handler)
     # os.system("cls") if 'Windows' in platform.system() else os.system("clear")
-    console.print("Main Menu:", style="bold underline green") 
+    print("\033[1\033[92mMain menu:\033[00m\033[0m")
     choice = input("""
 Enter '\033[1mnew\033[0m' to enter a new customer's details, and subsequently generate a quote
 Enter '\033[1mdisplay\033[0m' to display stored customer details
