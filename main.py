@@ -151,6 +151,36 @@ Enter '\033[1mexit\033[0m' to quit
     elif choice == "delete":
         # print("\nNot yet implemented")
         customer_data = pandas.read_csv("customers.csv")
+        os.system("cls") if 'Windows' in platform.system() else os.system("clear")
+        file_headers, file_rows = external_modules.reading_data_csv('customers.csv')
+        if file_rows == []:
+            print("\n\033[1mERROR:\033[0m No customers to delete")
+            temp_choice = input("Press enter to continue")
+            continue
+        print("Enter the customer's number to delete: ")
+        fnames = []
+        lnames = []
+        phones = []
+        towns = []
+        quotes = []
+        for row in file_rows:
+            fname, lname, phone, town, money = row.split(',')
+            fnames.append(fname); lnames.append(lname); phones.append(phone); towns.append(town); quotes.append(money)
+        for i in range(len(fnames)):
+            print(f"{i+1} - {fnames[i]} {lnames[i]}")
+        choice = input(">>> ")
+        if choice == "exit":
+            break
+        if external_modules.validate_choice(choice, len(fnames)) is False:
+            print("\n\033[1mERROR:\033[0m Invalid choice")
+            temp_choice = input("Press enter to continue")
+            continue
+        else:
+            customer_data.drop(customer_data.index[int(choice)-1], inplace=True)
+        customer_data.to_csv("customers.csv", index=False)
+        print("\n\033[1mCustomer deleted\033[0m")
+        temp_choice = input("Press enter to continue")
+        continue
     elif choice  == "exit":
         print("Exiting...")
         exit(0)
