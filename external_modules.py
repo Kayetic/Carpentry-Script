@@ -74,3 +74,21 @@ def reading_data_csv(filename):
     for i in range(len(read_rows)):
         read_rows[i] = read_rows[i].strip()
     return read_header, read_rows
+
+def validate_choice(choice_to_validate, number_of_choices):
+    """
+    Function to validate a choice by trying to convert it to an integer to see if its a number
+    Parameters: choice_to_validate (string) - the choice to be validated
+                number_of_choices (int) - the number of choices available
+    """
+    try:
+        int(choice_to_validate)
+        if (int(choice_to_validate) > number_of_choices) or (int(choice_to_validate) < 1):
+            return False
+        else:
+            return True
+    except ValueError:
+        return False
+        
+    
+    
