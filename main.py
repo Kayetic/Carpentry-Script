@@ -132,13 +132,16 @@ Enter '\033[1mexit\033[0m' to quit
                 fnames.append(fname); lnames.append(lname); phones.append(phone); towns.append(town); quotes.append(money)
             for i in range(len(fnames)):
                 print(f"{i+1} - {fnames[i]} {lnames[i]}")
-            choice = int(input(">>> "))
-            if choice > len(fnames):
+            choice = input(">>> ")
+            if choice == "exit":
+                break
+            if external_modules.validate_choice(choice, len(fnames)) is False:
                 print("\n\033[1mERROR:\033[0m Invalid choice")
+                temp_choice = input("Press enter to continue")
                 continue
             else:
                 os.system("cls") if 'Windows' in platform.system() else os.system("clear")
-                print(f"\n\033[1mCustomer's details:\033[0m\nFirst name: {fnames[choice-1]}\nLast name: {lnames[choice-1]}\nPhone number: {phones[choice-1]}\nTown: {towns[choice-1]}\nQuote: £{quotes[choice-1]}")
+                print(f"\n\033[1mCustomer's details:\033[0m\nFirst name: {fnames[int(choice)-1]}\nLast name: {lnames[int(choice)-1]}\nPhone number: {phones[int(choice)-1]}\nTown: {towns[int(choice)-1]}\nQuote: £{quotes[int(choice)-1]}")
             print("\n\033[1mEnter '\033[0mback\033[1m' to go back\033[0m or press any key to choose another customer")
             choice = input(">>> ")
             if choice == "back":
