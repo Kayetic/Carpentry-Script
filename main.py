@@ -1,6 +1,6 @@
 from signal import signal, SIGINT
-import time, os, external_modules, platform
 from rich.console import Console
+import time, external_modules, platform
 
 console = Console()
 
@@ -15,25 +15,6 @@ lastNames = []
 phones = []
 towns = []
 quotes = []
-
-try:
-    # Temporarily store the contents of customers file into a variable for easier use later
-    tempCustomers = open("customers.txt", "a+", encoding="utf-8").readlines()
-except FileNotFoundError:
-    print("Customer file not found! Please add a customer (1st choice on the main menu).")
-for element in tempCustomers:
-    customers.append(element.strip())
-# Separate each field in the customer text file into separate variables and append them to lists
-for iteration, allDetails in enumerate(customers):
-    try:
-        firstName, lastName, phone, town, quote = allDetails.split(", ")
-        firstNames.append(firstName)
-        lastNames.append(lastName)
-        phones.append(phone)
-        towns.append(town)
-        quotes.append(quote)
-    except ValueError:
-        print(f"\033[1mERROR:\033[0m Invalid customer file syntax detected at line: \033[1m{int(iteration) + 1}\033[0m of customers.txt file")
 
 ### Main menu ###
 while True:
@@ -134,7 +115,6 @@ Enter '\033[1mexit\033[0m' to quit
         temp_details.append(TOTAL_PRICE)
         data_to_add_with_quote = temp_details
         # Saving this amount to the text file
-        # external_modules.append_to_file('customers.txt', data_to_add_with_quote)
         print(temp_details)
         print(data_to_add_with_quote)
         print(type(data_to_add_with_quote))
