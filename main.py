@@ -68,7 +68,7 @@ Enter '\033[1mexit\033[0m' to quit
                 continue
             else:
                 break
-        while True:    
+        while True:
             width = input("Enter the width of the carpet: ")
             if external_modules.validate_length_or_width(width) is False:
                 temp_choice = input("Press '\033[1mENTER\033[0m' to continue\n")
