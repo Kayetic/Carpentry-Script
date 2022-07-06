@@ -118,6 +118,7 @@ Enter '\033[1mexit\033[0m' to quit
                 fnames.append(fname); lnames.append(lname); phones.append(phone); towns.append(town); quotes.append(money)
             for i in range(len(fnames)):
                 print(f"{i+1} - {fnames[i]} {lnames[i]}")
+            print("\nor enter '\033[1mexit\033[0m' to return to the main menu")
             choice = input(">>> ")
             if choice == "exit":
                 break
@@ -129,6 +130,7 @@ Enter '\033[1mexit\033[0m' to quit
                 os.system("cls") if 'Windows' in platform.system() else os.system("clear")
                 print(f"\n\033[1mCustomer's details:\033[0m\nFirst name: {fnames[int(choice)-1]}\nLast name: {lnames[int(choice)-1]}\nPhone number: {phones[int(choice)-1]}\nTown: {towns[int(choice)-1]}\nQuote: £{quotes[int(choice)-1]}")
             print("\n\033[1mEnter '\033[0mback\033[1m' to go back\033[0m or press any key to choose another customer")
+            # Needed to input the next choice
             choice = input(">>> ")
             if choice == "back":
                 break
