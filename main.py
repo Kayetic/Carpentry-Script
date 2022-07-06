@@ -30,32 +30,32 @@ Enter '\033[1mexit\033[0m' to quit
         os.system("cls") if 'Windows' in platform.system() else os.system("clear")
         first_name = input("Enter the customer's first name: ").title()
         if external_modules.validate_first_name(first_name) is False:
-            print("\n\033[1mERROR:\033[0m Invalid first name")
-            time.sleep(1)
+            print("\n   \033[1mERROR:\033[0m Invalid first name")
+            temp_choice = input("   Press '\033[1mENTER\033[0m' to continue\n   ")
             continue
         else:
             temp_details.append(first_name)
         last_name = input("Enter the customer's last name: ").title()
         if external_modules.validate_last_name(last_name) is False:
-            print("\n\033[1mERROR:\033[0m Invalid last name")
-            time.sleep(1)
+            print("\n   \033[1mERROR:\033[0m Invalid last name")
+            temp_choice = input("   Press '\033[1mENTER\033[0m' to continue\n   ")
             continue
         if last_name.isalpha() is False:
-            print("\n\033[1mERROR:\033[0m Last name must be alphabetical")
-            time.sleep(1)
+            print("\n   \033[1mERROR:\033[0m Last name must be alphabetical")
+            temp_choice = input("   Press '\033[1mENTER\033[0m' to continue\n   ")
             continue
         temp_details.append(last_name)
         telephone = input("Enter the customer's telephone number: ")
         if external_modules.validate_phone(telephone) is False:
-            print("\n\033[1mERROR:\033[0m Invalid phone number entered. Please try again.")
-            time.sleep(1)
+            print("\n   \033[1mERROR:\033[0m Invalid phone number entered. Please try again.")
+            temp_choice = input("   Press '\033[1mENTER\033[0m' to continue\n   ")
             continue
         else:
             temp_details.append(telephone)
         town = input("Enter the user's town: ").title()
         if external_modules.validate_town(town) is False:
             print("\n\033[1mERROR:\033[0m Invalid town name entered. Please try again.")
-            time.sleep(1)
+            temp_choice = input("   Press '\033[1mENTER\033[0m' to continue\n   ")
             continue
         else:
             temp_details.append(town)
@@ -64,23 +64,23 @@ Enter '\033[1mexit\033[0m' to quit
         while True:
             length = input("Enter the length of the carpet: ")
             if external_modules.validate_length_or_width(length) is False:
-                temp_choice = input("Press '\033[1mENTER\033[0m' to continue\n")
+                temp_choice = input("   Press '\033[1mENTER\033[0m' to continue\n   ")
                 continue
             else:
                 break
         while True:
             width = input("Enter the width of the carpet: ")
             if external_modules.validate_length_or_width(width) is False:
-                temp_choice = input("Press '\033[1mENTER\033[0m' to continue\n")
+                temp_choice = input("   Press '\033[1mENTER\033[0m' to continue\n   ")
                 continue
             else:
                 break
-        carpet_area = length * width
+        carpet_area = int(length) * int(width)
         underlay_area = carpet_area
         gripper_length = (2*length + 2*width)
 
         price_carpet = carpet_area * 22.5
-        price_gripper = gripper_length * 1.1
+        price_gripper = int(gripper_length) * 1.1
         underlay_choice = input("Choose which underlay you want:\nEnter 1 for First Step\nEnter 2 for Monarch\nEnter 3 for Royal\n>>> ")
         if underlay_choice == "1":
             underlay_price = carpet_area * 5.99
