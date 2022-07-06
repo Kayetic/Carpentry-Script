@@ -90,5 +90,24 @@ def validate_choice(choice_to_validate, number_of_choices):
     except ValueError:
         return False
         
-    
+def validate_length_or_width(length_or_width):
+    """
+    Function to validate a length or width by trying to convert it to an integer to see if its a number
+    Parameters: length_or_width (string) - the length or width to be validated
+    """
+    try:
+        int(length_or_width)
+        if int(length_or_width) < 0:
+            print("\n\033[1mERROR:\033[0m The length or width cannot be negative")
+            return False
+        if int(length_or_width) > 10000:
+            print("\n\033[1mERROR:\033[0m The length or width cannot be greater than 10000")
+            return False
+        if int(length_or_width) < 0.1:
+            print("\n\033[1mERROR:\033[0m The length or width cannot be less than 0.1")
+            return False
+    except ValueError:
+        print("\n\033[1mERROR:\033[0m The length and width must be numbers")
+        return False
+    return True
     
