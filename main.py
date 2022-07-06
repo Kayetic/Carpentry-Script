@@ -61,35 +61,20 @@ Enter '\033[1mexit\033[0m' to quit
             temp_details.append(town)
         print(f"Saving to file: {temp_details}")
         print(f"\nNow you should create a quote for: {first_name} {last_name}")
-        length = float(input("Enter the length of the carpet: "))
-        try :
-            int(length)
-        except ValueError:
-            print("Incorrect length, try again")
-            continue
-        except TypeError:
-            print("Incorrect length, try again")
-            continue
-        if length == 0:
-            print("\n\033[1mERROR:\033[0m Invalid length")
-            continue
-        if length > 10000:
-            print("\n\033[1mERROR:\033[0m Length must be less than 10,000")
-            continue
-        if length < 0.1:
-            print("\n\033[1mERROR:\033[0m Length must be greater than 0.1m")
-            continue
-
-        width = float(input("Enter the width of the carpet: "))
-        if width == 0:
-            print("\n\033[1mERROR:\033[0m Invalid width")
-            continue
-        if width > 10000:
-            print("\n\033[1mERROR:\033[0m Width must be less than 10,000")
-            continue
-        if width < 0.1:
-            print("\n\033[1mERROR:\033[0m Width must be greater than 0.1m")
-            continue
+        while True:
+            length = input("Enter the length of the carpet: ")
+            if external_modules.validate_length_or_width(length) is False:
+                temp_choice = input("Press '\033[1mENTER\033[0m' to continue\n")
+                continue
+            else:
+                break
+        while True:    
+            width = input("Enter the width of the carpet: ")
+            if external_modules.validate_length_or_width(width) is False:
+                temp_choice = input("Press '\033[1mENTER\033[0m' to continue\n")
+                continue
+            else:
+                break
         carpet_area = length * width
         underlay_area = carpet_area
         gripper_length = (2*length + 2*width)
@@ -138,7 +123,7 @@ Enter '\033[1mexit\033[0m' to quit
                 break
             if external_modules.validate_choice(choice, len(fnames)) is False:
                 print("\n\033[1mERROR:\033[0m Invalid choice")
-                temp_choice = input("Press enter to continue")
+                temp_choice = input("Press enter to continue\n")
                 continue
             else:
                 os.system("cls") if 'Windows' in platform.system() else os.system("clear")
@@ -156,7 +141,7 @@ Enter '\033[1mexit\033[0m' to quit
         file_headers, file_rows = external_modules.reading_data_csv('customers.csv')
         if file_rows == []:
             print("\n\033[1mERROR:\033[0m No customers to delete")
-            temp_choice = input("Press enter to continue")
+            temp_choice = input("Press enter to continue\n")
             continue
         print("Enter the customer's number to delete: ")
         fnames = []
@@ -174,7 +159,7 @@ Enter '\033[1mexit\033[0m' to quit
             break
         if external_modules.validate_choice(choice, len(fnames)) is False:
             print("\n\033[1mERROR:\033[0m Invalid choice")
-            temp_choice = input("Press enter to continue")
+            temp_choice = input("Press enter to continue\n")
             continue
         else:
             customer_data.drop(customer_data.index[int(choice)-1], inplace=True)
