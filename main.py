@@ -1,5 +1,8 @@
 from signal import signal, SIGINT
-import time, os, external_modules, platform, pandas
+"""
+Singnal and SIGINIT are used to handle CTRL-C and SIGINT, and exit gracefully.
+"""
+import os, external_modules, platform, pandas
 
 def handler(signal_received, frame):
     # Handling any cleanup here
