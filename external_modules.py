@@ -5,18 +5,21 @@ def validate_phone(phone):
     if len(phone) == 11 and phone.isdigit():
         return True
     else:
+        print("\n   \033[1mERROR:\033[0m The phone number must be a string of 11 digits")
         return False
 
 def validate_town(town):
     if (len(town) > 0) and town.isalpha():
         return True
     else:
+        print("\n   \033[1mERROR:\033[0m The town must be a string, and cannot be empty")
         return False
 
 def validate_first_name(name):
     if (len(name) > 0) and name.isalpha():
         return True
     else:
+        print("\n   \033[1mERROR:\033[0m The first name must be a string, and cannot be empty")
         return False
 
 def validate_last_name(name):
